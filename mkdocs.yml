@@ -115,6 +115,7 @@ nav:
           - Common Carp: guides/common-carp.md
   - Fishing Log:
       - blog/index.md
+  - About: about.md
 
 extra:
   social:
