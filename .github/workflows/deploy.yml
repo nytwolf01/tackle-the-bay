@@ -1,0 +1,72 @@
+name: Deploy Tackle the Bay
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow one concurrent deployment; don't cancel an in-progress run.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      # Cairo / Pango / image libs are required by the social-cards plugin.
+      - name: Install image libraries
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            libcairo2-dev libfreetype6-dev libffi-dev \
+            libjpeg-dev libpng-dev libz-dev libpango1.0-dev
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      # Cache generated social cards between runs to speed up builds.
+      - name: Cache social cards
+        uses: actions/cache@v4
+        with:
+          path: .cache
+          key: mkdocs-social-${{ github.run_id }}
+          restore-keys: |
+            mkdocs-social-
+
+      # CI=true is set automatically by GitHub Actions, which enables the
+      # social plugin (see mkdocs.yml: enabled: !ENV [CI, false]).
+      - name: Build site
+        run: mkdocs build --strict
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

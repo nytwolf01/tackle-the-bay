@@ -1,0 +1,123 @@
+site_name: Tackle the Bay
+site_url: https://tacklethebay.com
+site_description: >-
+  Tackle the Bay — Chesapeake and Mid-Atlantic species guides and fishing
+  reports, from the Bay Bridge pilings to the coastal surf and the rivers
+  in between.
+site_author: Bronson Peake
+copyright: Copyright &copy; 2026 Tackle the Bay
+
+theme:
+  name: material
+  icon:
+    logo: material/fish
+    repo: fontawesome/brands/github
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: teal
+      accent: light blue
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: teal
+      accent: light blue
+      toggle:
+        icon: material/weather-night
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - navigation.indexes
+    - navigation.footer
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - toc.follow
+
+plugins:
+  - search
+  - social:
+      enabled: !ENV [CI, false]
+  - blog:
+      blog_dir: blog
+      blog_toc: true
+      post_url_format: "{date}/{slug}"
+      post_date_format: long
+      archive_date_format: MMMM yyyy
+      pagination_per_page: 10
+      categories_allowed:
+        - Striped Bass
+        - Summer Flounder
+        - Bluefish
+        - Tautog
+        - Red Drum
+        - Smallmouth Bass
+        - Surf Fishing
+        - Kayak
+        - Freshwater
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - footnotes
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+
+nav:
+  - Home: index.md
+  - Species Guides:
+      - guides/index.md
+      - Saltwater & Bay:
+          - Striped Bass: guides/striped-bass.md
+          - White Perch: guides/white-perch.md
+          - Bluefish: guides/bluefish.md
+          - Spanish Mackerel: guides/spanish-mackerel.md
+          - Summer Flounder (Fluke): guides/summer-flounder.md
+          - Atlantic Croaker: guides/atlantic-croaker.md
+          - Red Drum: guides/red-drum.md
+          - Black Drum: guides/black-drum.md
+          - Spot: guides/spot.md
+          - Speckled Trout: guides/speckled-trout.md
+          - Weakfish: guides/weakfish.md
+          - Cobia: guides/cobia.md
+          - Sheepshead: guides/sheepshead.md
+          - Spadefish: guides/spadefish.md
+          - Shad: guides/shad.md
+      - Freshwater:
+          - Blue Catfish: guides/blue-catfish.md
+          - Channel Catfish: guides/channel-catfish.md
+          - Largemouth Bass: guides/largemouth-bass.md
+          - Smallmouth Bass: guides/smallmouth-bass.md
+          - Northern Snakehead: guides/northern-snakehead.md
+          - Yellow Perch: guides/yellow-perch.md
+          - Crappie: guides/crappie.md
+          - Bluegill & Sunfish: guides/bluegill-sunfish.md
+          - Trout: guides/trout.md
+          - Walleye: guides/walleye.md
+          - Muskellunge: guides/muskellunge.md
+          - Chain Pickerel: guides/chain-pickerel.md
+          - Flathead Catfish: guides/flathead-catfish.md
+          - Common Carp: guides/common-carp.md
+  - Fishing Log:
+      - blog/index.md
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/
+      name: GitHub
