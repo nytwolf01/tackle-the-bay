@@ -5,7 +5,13 @@ site_description: >-
   reports, from the Bay Bridge pilings to the coastal surf and the rivers
   in between.
 site_author: Bronson Peake
-copyright: Copyright &copy; 2026 Tackle the Bay
+copyright: >-
+  Copyright &copy; 2026 Tackle the Bay &middot;
+  <a href="/disclosure/">Affiliate Disclosure</a>
+
+# Pages built but intentionally kept out of the nav (linked from the footer).
+not_in_nav: |
+  /disclosure.md
 
 theme:
   name: material
@@ -118,6 +124,10 @@ nav:
   - About: about.md
 
 extra:
+  # Analytics: uncomment and add your GA4 Measurement ID to turn on tracking.
+  # analytics:
+  #   provider: google
+  #   property: G-XXXXXXXXXX
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/
